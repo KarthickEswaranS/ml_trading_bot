@@ -28,11 +28,7 @@ class Data:
         to_numeric_data = ['Open', 'High', 'Low', 'Close', 'Volume', 'Quote Asset Volume', 'Taker Buy Base Asset Volume', 'Taker Buy Quote Asset Volume']
         df[to_numeric_data] = df[to_numeric_data].apply(pd.to_numeric)
     
-        df = df.set_index(df['Open Time'])
-        df = df.drop(columns=['Open Time'])
-
-        # print(df.head())
-        # self.feature(df)
+        df.set_index('Open Time', inplace=True)
         return df
     
 

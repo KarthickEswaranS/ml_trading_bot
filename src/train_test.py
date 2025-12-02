@@ -10,6 +10,7 @@ class TrainTest(Features):
 
     def __init__(self):
         super().__init__()
+        self.train_test()
 
     def train_test(self):
         df = self.feature()
@@ -18,15 +19,15 @@ class TrainTest(Features):
         y = df['target'].values
 
         tscv = TimeSeriesSplit(n_splits=5)
+        # for train_index, test_index in tscv.split(X):
+        #   print("Train:", train_index, "Test:", test_index)
         # print(tscv)
 
         # We'll perform a simple train-test split: last 20% as test
         split_index = int(len(df) * 0.8)
         X_train, X_test = X[:split_index], X[split_index:]
         y_train, y_test = y[:split_index], y[split_index:]
-        dates_train = df.index[:split_index]
-        dates_test = df.index[split_index:]
-
+     
         # Scale features
         scaler = StandardScaler()
         X_train_scaled = scaler.fit_transform(X_train)
@@ -54,5 +55,4 @@ class TrainTest(Features):
 
         return y_pred,y_proba
     
-# tt = TrainTest()
-# tt.train_test()
+TrainTest()
